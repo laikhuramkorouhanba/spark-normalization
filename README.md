@@ -4,7 +4,7 @@ The data is minute-by-minute electrical readings from a single household over se
 
 The file is semicolon-separated with nine fields per record, and missing readings appear as question marks rather than empty cells, so parsing has to handle that before any arithmetic happens.
 
-##$$ Data
+#### Data
 
 Individual Household Electric Power Consumption, UCI Machine Learning Repository:
 https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption
