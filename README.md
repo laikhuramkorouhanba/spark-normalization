@@ -1,17 +1,12 @@
-# NORMALIZATION_IN_SPARK
+Normalising the numerical columns of a household power consumption log using Spark.
 
-This repo contains program for implementing normalization function on numerical data using Spark.
+The data is minute-by-minute electrical readings from a single household over several years, which makes it large enough that the normalisation is worth distributing rather than doing in memory. That is really the point of the exercise. Min-max scaling is trivial arithmetic, but computing it across a distributed dataset means one pass to find each column's minimum and maximum and a second to apply the transform, and being deliberate about that is the difference between something that runs and something that runs out of memory.
 
-<h3>DATASET:</h3>
-<p>LINK: https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption </p>
-<p>The data is presented in a single text file, with each line representing a unique record. Each record is meticulously structured using semicolons to separate nine informative attributes:</p>
+The file is semicolon-separated with nine fields per record, and missing readings appear as question marks rather than empty cells, so parsing has to handle that before any arithmetic happens.
 
-<p>Date: Captures the specific day the measurement was taken.</p>
-<p>Time: Provides the time within the day for the measurement.</p>
-<h3>POWER MEASUREMENTS:</h3>
-<p>global_active_power: Household's overall active power usage (kilowatts) averaged over a minute.</p>
-<p>global_reactive_power: Household's overall reactive power usage (kilowatts) averaged over a minute.</p>
-<p>voltage: Minute-averaged voltage (volts).</p>
-<p>global_intensity: Minute-averaged current intensity (amperes).</p>
-<p>Sub-metering Values:
-sub_metering_1, sub_metering_2, sub_metering_3: Energy consumption readings (watt-hours) from specific appliances or areas within the household (details not provided).</p>
+##$$ Data
+
+Individual Household Electric Power Consumption, UCI Machine Learning Repository:
+https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption
+
+Fields are date, time, global active power, global reactive power, voltage, global intensity, and three sub-metering readings.
